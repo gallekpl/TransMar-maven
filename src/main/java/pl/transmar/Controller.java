@@ -1,11 +1,13 @@
 package pl.transmar;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.util.LinkedList;
@@ -218,6 +220,7 @@ public class Controller {
             polePracownik.clear();
         } else {
             infoLabel.setText("Podaj imię i nazwisko.");
+            infoLabelFade();
         }
     }
 
@@ -239,14 +242,17 @@ public class Controller {
                     zaznaczeni.dodajGodziny(day, hours);
                     textArea.setText(zaznaczeni.pokazGodziny());
                     infoLabel.setText("Added.");
+                    infoLabelFade();
                 } else {
                     infoLabel.setText("Day must be from 1 to 31.");
+                    infoLabelFade();
                 }
             }
-        } catch(IllegalArgumentException e) {
+        } catch(NumberFormatException e) {
             System.out.println("Not a number.");
-            e.printStackTrace();
+            //e.printStackTrace();
             infoLabel.setText("Not a number.");
+            infoLabelFade();
         }
     }
 
@@ -263,11 +269,13 @@ public class Controller {
             out.close();
             file.close();
             infoLabel.setText("File saved.");
+            infoLabelFade();
         }
 
         catch(IOException ex)
         {
             infoLabel.setText("IOException");
+            infoLabelFade();
             System.out.println("IOException is caught in save process.");
         }
     }
@@ -277,5 +285,21 @@ public class Controller {
     }
     public void about(){
         textArea.setText("-------------\n\nMade by Gallek\nJDK 13\nJavaFX13\nMaven\n\n-------------");
+    }
+
+    public void infoLabelFade() {
+
+        // Set up a fade-in and fade-out animation for the rectangle
+        FadeTransition trans = new FadeTransition(Duration.seconds(3), infoLabel);
+
+        trans.setFromValue(1.0);
+        trans.setToValue(.0);
+        trans.setCycleCount(1);
+
+        // Play the Animation
+        trans.play();
+        trans.setDelay(Duration.seconds(3));
+
+
     }
 }
