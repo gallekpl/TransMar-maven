@@ -1,5 +1,6 @@
 package pl.transmar;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -269,5 +270,12 @@ public class Controller {
             infoLabel.setText("IOException");
             System.out.println("IOException is caught in save process.");
         }
+    }
+    public void exit() {
+        saveList();
+        Platform.exit();
+    }
+    public void about(){
+        textArea.setText("-------------\n\nMade by Gallek\nJDK 13\nJavaFX13\nMaven\n\n-------------");
     }
 }

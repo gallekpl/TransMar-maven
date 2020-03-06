@@ -11,13 +11,14 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" onAction="#saveList" text="Save" />
+            <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
          </Menu>
          <Menu mnemonicParsing="false" text="Edit">
             <MenuItem mnemonicParsing="false" text="Delete" />
          </Menu>
          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem mnemonicParsing="false" text="About" />
+            <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
          </Menu>
       </MenuBar>
    </top>
