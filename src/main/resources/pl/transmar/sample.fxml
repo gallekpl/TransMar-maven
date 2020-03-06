@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.transmar.Controller">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+         <Menu mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" text="Close" />
+         </Menu>
+         <Menu mnemonicParsing="false" text="Edit">
+            <MenuItem mnemonicParsing="false" text="Delete" />
+         </Menu>
+         <Menu mnemonicParsing="false" text="Help">
+            <MenuItem mnemonicParsing="false" text="About" />
+         </Menu>
+      </MenuBar>
+   </top>
+   <bottom>
+      <HBox alignment="TOP_RIGHT" fillHeight="false" BorderPane.alignment="TOP_CENTER">
+         <Label text="Day">
+            <HBox.margin>
+               <Insets bottom="10.0" left="10.0" top="12.0" />
+            </HBox.margin>
+         </Label>
+         <TextField fx:id="dayTextField" prefHeight="25.0" prefWidth="50.0">
+            <HBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </HBox.margin>
+         </TextField>
+         <Label text="Hours">
+            <HBox.margin>
+               <Insets bottom="10.0" left="10.0" top="12.0" />
+            </HBox.margin>
+         </Label>
+         <TextField fx:id="hoursTextField" prefHeight="25.0" prefWidth="50.0">
+            <HBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </HBox.margin>
+         </TextField>
+         <Button mnemonicParsing="false" onAction="#dodajGodziny" text="Add hours" HBox.hgrow="ALWAYS">
+            <HBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </HBox.margin>
+         </Button>
+         <Label fx:id="infoLabel" prefHeight="17.0" prefWidth="115.0" textAlignment="RIGHT">
+            <HBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="12.0" />
+            </HBox.margin>
+         </Label>
+         <Button mnemonicParsing="false" onAction="#saveList" text="Save lists">
+            <HBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </HBox.margin>
+         </Button>
+         <Button mnemonicParsing="false" onAction="#addWorker" text="Add worker">
+            <HBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </HBox.margin></Button>
+         <Button mnemonicParsing="false" onAction="#removeWorker" text="Remove worker">
+            <HBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </HBox.margin>
+         </Button>
+      </HBox>
+   </bottom>
+   <center>
+      <TextArea fx:id="textArea" editable="false" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Monospaced Regular" size="12.0" />
+         </font>
+      </TextArea>
+   </center>
+   <right>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <HBox fillHeight="false" VBox.vgrow="NEVER">
+            <VBox.margin>
+               <Insets />
+            </VBox.margin>
+            <Label text="Month">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="14.0" />
+               </HBox.margin>
+            </Label>
+            <ChoiceBox fx:id="monthChoiceBox" value="January">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="January" />
+                     <String fx:value="February" />
+                     <String fx:value="March" />
+                     <String fx:value="April" />
+                     <String fx:value="May" />
+                     <String fx:value="June" />
+                     <String fx:value="July" />
+                     <String fx:value="August" />
+                     <String fx:value="September" />
+                     <String fx:value="October" />
+                     <String fx:value="November" />
+                     <String fx:value="December" />
+                  </FXCollections>
+               </items>
+               <HBox.margin>
+                  <Insets bottom="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </ChoiceBox>
+            <ChoiceBox fx:id="yearChoiceBox" value="2020">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="2020" />
+                     <String fx:value="2021" />
+                     <String fx:value="2022" />
+                     <String fx:value="2023" />
+                     <String fx:value="2024" />
+                     <String fx:value="2025" />
+                     <String fx:value="2026" />
+                  </FXCollections>
+               </items>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </ChoiceBox>
+         </HBox>
+         <ListView fx:id="listaPracownikowView" editable="true" VBox.vgrow="ALWAYS" />
+         <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="150.0" text="Worker">
+            <VBox.margin>
+               <Insets left="10.0" right="10.0" top="10.0" />
+            </VBox.margin>
+         </Label>
+         <TextField fx:id="polePracownik">
+            <VBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" />
+            </VBox.margin>
+         </TextField>
+      </VBox>
+   </right>
+</BorderPane>
