@@ -38,7 +38,13 @@
         <version>0.0.3</version>
         <configuration>
           <mainClass>pl.transmar.Main</mainClass>
-          <launcher>ader</launcher>
+          <launcher>TransMar</launcher>
+          <stripDebug>true</stripDebug>
+          <compress>2</compress>
+          <noHeaderFiles>true</noHeaderFiles>
+          <noManPages>true</noManPages>
+          <jlinkImageName>TransMar</jlinkImageName>
+          <jlinkZipName>TMzip</jlinkZipName>
         </configuration>
       </plugin>
       <plugin>

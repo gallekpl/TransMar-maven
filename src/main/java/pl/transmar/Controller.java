@@ -227,6 +227,7 @@ public class Controller {
     public void removeWorker() {
         Pracownik name = listaPracownikowView.getSelectionModel().getSelectedItem();
         listaPracownikowView.getItems().remove(name);
+        lista.remove(name);
     }
 
     public void dodajGodziny() {
@@ -298,7 +299,6 @@ public class Controller {
 
         // Play the Animation
         trans.play();
-        trans.setDelay(Duration.seconds(3));
 
 
     }
