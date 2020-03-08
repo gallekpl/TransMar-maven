@@ -1,17 +1,17 @@
 package pl.transmar;
 
-import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.Duration;
 
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Controller {
     @FXML
@@ -221,16 +221,12 @@ public class Controller {
     }
 
     public void addWorker() {
-        if (!polePracownik.getText().equals("")) {
-            Pracownik name = new Pracownik(polePracownik.getText());
-            lista.add(name);
-            listaPracownikowView.getItems().add(name);
-            listaPracownikowView.getSelectionModel().selectLast();
-            polePracownik.clear();
-        } else {
-            infoLabel.setText("Podaj imię i nazwisko.");
-            infoLabelFade();
-        }
+        Pracownik name = new Pracownik(polePracownik.getText());
+        lista.add(name);
+        listaPracownikowView.getItems().add(name);
+        listaPracownikowView.getSelectionModel().selectLast();
+        polePracownik.clear();
+
     }
 
     public void removeWorker() {
@@ -250,6 +246,7 @@ public class Controller {
 
             zaznaczeni.dodajGodziny(day, hours);
             textArea.setText(zaznaczeni.pokazGodziny());
+            infoLabel.setVisible(true);
             infoLabel.setText("Added.");
             infoLabelFade();
         }
@@ -268,12 +265,14 @@ public class Controller {
             out.writeObject(years);
             out.close();
             file.close();
+            infoLabel.setVisible(true);
             infoLabel.setText("File saved.");
             infoLabelFade();
         }
 
         catch(IOException ex)
         {
+            infoLabel.setVisible(true);
             infoLabel.setText("IOException");
             infoLabelFade();
             System.out.println("IOException is caught in save process.");
@@ -291,16 +290,20 @@ public class Controller {
 
     public void infoLabelFade() {
 
-        // Set up a fade-in and fade-out animation for the rectangle
-        FadeTransition trans = new FadeTransition(Duration.seconds(3), infoLabel);
-
-        trans.setFromValue(1.0);
-        trans.setToValue(.0);
-        trans.setCycleCount(1);
-
-        // Play the Animation
-        trans.play();
-
+        // Set up a fade animation
+        Timer timer = new Timer();
+        TimerTask tt = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        infoLabel.setText("");
+                    }
+                });
+            }
+        };
+        timer.schedule(tt, 3000);
 
     }
 
