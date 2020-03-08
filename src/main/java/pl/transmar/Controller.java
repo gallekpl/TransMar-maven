@@ -32,12 +32,18 @@ public class Controller {
     private Label infoLabel;
     @FXML
     private List<Pracownik> lista;
+    @FXML
+    private Button addHoursButton;
+    @FXML
+    private Button addWorkerButton;
+    @FXML
+    private Button removeWorkerButton;
     private Year year;
     private List<Year> years;
 
 
 
-
+    @FXML
     public void initialize() {
         String filename = "lists2.ser";
 
@@ -89,7 +95,8 @@ public class Controller {
             public void changed(ObservableValue<? extends Pracownik> observableValue, Pracownik pracownik, Pracownik t1) {
                 if (t1 != null) {
                     textArea.setText(t1.pokazGodziny());
-                }
+                    removeWorkerButton.setDisable(false);
+                } else removeWorkerButton.setDisable(true);
             }
         });
         yearChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -208,8 +215,10 @@ public class Controller {
                 listaPracownikowView.getItems().addAll(lista);
             }
         });
+        addHoursButton.setDisable(true);
+        addWorkerButton.setDisable(true);
+        removeWorkerButton.setDisable(true);
     }
-
 
     public void addWorker() {
         if (!polePracownik.getText().equals("")) {
@@ -234,27 +243,17 @@ public class Controller {
         ObservableList<Pracownik> zaznaczeniList = listaPracownikowView.getSelectionModel().getSelectedItems();
         int day;
         int hours;
-        try {
-            day = Integer.parseInt(dayTextField.getText());
-            hours = Integer.parseInt(hoursTextField.getText());
+        day = Integer.parseInt(dayTextField.getText());
+        hours = Integer.parseInt(hoursTextField.getText());
 
-            for (Pracownik zaznaczeni:zaznaczeniList) {
-                if (day > 0 && day < 32) {
-                    zaznaczeni.dodajGodziny(day, hours);
-                    textArea.setText(zaznaczeni.pokazGodziny());
-                    infoLabel.setText("Added.");
-                    infoLabelFade();
-                } else {
-                    infoLabel.setText("Day must be from 1 to 31.");
-                    infoLabelFade();
-                }
-            }
-        } catch(NumberFormatException e) {
-            System.out.println("Not a number.");
-            //e.printStackTrace();
-            infoLabel.setText("Not a number.");
+        for (Pracownik zaznaczeni:zaznaczeniList) {
+
+            zaznaczeni.dodajGodziny(day, hours);
+            textArea.setText(zaznaczeni.pokazGodziny());
+            infoLabel.setText("Added.");
             infoLabelFade();
         }
+
     }
 
     public void saveList() {
@@ -280,10 +279,12 @@ public class Controller {
             System.out.println("IOException is caught in save process.");
         }
     }
+
     public void exit() {
         saveList();
         Platform.exit();
     }
+
     public void about(){
         textArea.setText("-------------\n\nMade by Gallek\nJDK 13\nJavaFX13\nMaven\n\n-------------");
     }
@@ -301,5 +302,32 @@ public class Controller {
         trans.play();
 
 
+    }
+
+    public void onKeyReleased() {
+        int day;
+        int hours;
+        try {
+            day = Integer.parseInt(dayTextField.getText());
+            hours = Integer.parseInt(hoursTextField.getText());
+
+        } catch(NumberFormatException e) {
+            System.out.println("Wrong input.");
+            //e.printStackTrace();
+            day = -1;
+            hours = -1;
+            infoLabel.setText("Wrong input.");
+            infoLabelFade();
+        }
+        if (day<1 || hours<0 || day>31) {
+            addHoursButton.setDisable(true);
+        } else {
+            addHoursButton.setDisable(false);
+            infoLabel.setText("Wrong input.");
+            infoLabelFade();
+        }
+        if (polePracownik.getText().isEmpty() || polePracownik.getText().trim().isEmpty()) {
+            addWorkerButton.setDisable(true);
+        } else addWorkerButton.setDisable(false);
     }
 }

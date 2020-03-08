@@ -29,7 +29,7 @@
                <Insets bottom="10.0" left="10.0" top="12.0" />
             </HBox.margin>
          </Label>
-         <TextField fx:id="dayTextField" prefHeight="25.0" prefWidth="50.0">
+         <TextField fx:id="dayTextField" onKeyReleased="#onKeyReleased" prefHeight="25.0" prefWidth="50.0">
             <HBox.margin>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </HBox.margin>
@@ -39,12 +39,12 @@
                <Insets bottom="10.0" left="10.0" top="12.0" />
             </HBox.margin>
          </Label>
-         <TextField fx:id="hoursTextField" prefHeight="25.0" prefWidth="50.0">
+         <TextField fx:id="hoursTextField" onKeyReleased="#onKeyReleased" prefHeight="25.0" prefWidth="50.0">
             <HBox.margin>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </HBox.margin>
          </TextField>
-         <Button mnemonicParsing="false" onAction="#dodajGodziny" text="Add hours" HBox.hgrow="ALWAYS">
+         <Button fx:id="addHoursButton" mnemonicParsing="false" onAction="#dodajGodziny" text="Add hours" HBox.hgrow="ALWAYS">
             <HBox.margin>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </HBox.margin>
@@ -59,11 +59,11 @@
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </HBox.margin>
          </Button>
-         <Button mnemonicParsing="false" onAction="#addWorker" text="Add worker">
+         <Button fx:id="addWorkerButton" mnemonicParsing="false" onAction="#addWorker" text="Add worker">
             <HBox.margin>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </HBox.margin></Button>
-         <Button mnemonicParsing="false" onAction="#removeWorker" text="Remove worker">
+         <Button fx:id="removeWorkerButton" mnemonicParsing="false" onAction="#removeWorker" text="Remove worker">
             <HBox.margin>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </HBox.margin>
@@ -132,7 +132,7 @@
                <Insets left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
          </Label>
-         <TextField fx:id="polePracownik">
+         <TextField fx:id="polePracownik" onKeyReleased="#onKeyReleased">
             <VBox.margin>
                <Insets bottom="10.0" left="10.0" right="10.0" />
             </VBox.margin>
