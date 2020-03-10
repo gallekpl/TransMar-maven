@@ -290,7 +290,7 @@ public class Controller {
 
     public void infoLabelFade() {
 
-        // Set up a fade animation
+        // Set up text disappearance.
         Timer timer = new Timer();
         TimerTask tt = new TimerTask() {
             @Override
@@ -303,7 +303,14 @@ public class Controller {
                 });
             }
         };
+        TimerTask tt2 = new TimerTask() {
+            @Override
+            public void run() {
+                timer.cancel();
+            }
+        };
         timer.schedule(tt, 3000);
+        timer.schedule(tt2, 4000);
 
     }
 
@@ -315,19 +322,14 @@ public class Controller {
             hours = Integer.parseInt(hoursTextField.getText());
 
         } catch(NumberFormatException e) {
-            System.out.println("Wrong input.");
-            //e.printStackTrace();
+                        //e.printStackTrace();
             day = -1;
             hours = -1;
-            infoLabel.setText("Wrong input.");
-            infoLabelFade();
         }
         if (day<1 || hours<0 || day>31) {
             addHoursButton.setDisable(true);
         } else {
             addHoursButton.setDisable(false);
-            infoLabel.setText("Wrong input.");
-            infoLabelFade();
         }
         if (polePracownik.getText().isEmpty() || polePracownik.getText().trim().isEmpty()) {
             addWorkerButton.setDisable(true);

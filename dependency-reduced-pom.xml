@@ -7,6 +7,17 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>com.sandec.jpro</groupId>
+        <artifactId>jpro-maven-plugin</artifactId>
+        <version>2019.2.2</version>
+        <configuration>
+          <visible>false</visible>
+          <JVMArgs />
+          <mainClassName>pl.transmar.GallekApp</mainClassName>
+          <openingPath>/</openingPath>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.2.2</version>
         <executions>
@@ -44,7 +55,6 @@
           <noHeaderFiles>true</noHeaderFiles>
           <noManPages>true</noManPages>
           <jlinkImageName>TransMar</jlinkImageName>
-          <jlinkZipName>TMzip</jlinkZipName>
         </configuration>
       </plugin>
       <plugin>
@@ -60,8 +70,21 @@
       </plugin>
     </plugins>
   </build>
+  <repositories>
+    <repository>
+      <id>jpro - sandec repository</id>
+      <url>https://sandec.bintray.com/repo</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>jpro - sandec repository</id>
+      <url>https://sandec.bintray.com/repo</url>
+    </pluginRepository>
+  </pluginRepositories>
   <properties>
     <maven.compiler.target>13</maven.compiler.target>
+    <jpro.version>2019.2.2</jpro.version>
     <maven.compiler.source>13</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

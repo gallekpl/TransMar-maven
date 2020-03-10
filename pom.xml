@@ -5,6 +5,7 @@
     <artifactId>transmar</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
+        <jpro.version>2019.2.2</jpro.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>13</maven.compiler.source>
         <maven.compiler.target>13</maven.compiler.target>
@@ -14,33 +15,54 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>13.0.2</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>13.0.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>13.0.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>13.0.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>13.0.2</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sandec.jpro</groupId>
+            <artifactId>jpro-webapi</artifactId>
+            <version>2019.2.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.2</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>pl.transmar.Main</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>com.sandec.jpro</groupId>
+                <artifactId>jpro-maven-plugin</artifactId>
+                <version>2019.2.2</version>
+                <configuration>
+                    <visible>false</visible>
+                    <JVMArgs>
+                        <!-- <JVMArg>your-args</JVMArg> -->
+                    </JVMArgs>
+                    <mainClassName>pl.transmar.GallekApp</mainClassName>
+                    <openingPath>/</openingPath>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -62,22 +84,20 @@
                     <noHeaderFiles>true</noHeaderFiles>
                     <noManPages>true</noManPages>
                     <jlinkImageName>TransMar</jlinkImageName>
-                    <jlinkZipName>TMzip</jlinkZipName>
-                </configuration>
-            </plugin>
-            <plugin>
-                <!-- Build an executable JAR -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>pl.transmar.Main</mainClass>
-                        </manifest>
-                    </archive>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jpro - sandec repository</id>
+            <url>https://sandec.bintray.com/repo</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <repositories>
+        <repository>
+            <id>jpro - sandec repository</id>
+            <url>https://sandec.bintray.com/repo</url>
+        </repository>
+    </repositories>
 </project>
