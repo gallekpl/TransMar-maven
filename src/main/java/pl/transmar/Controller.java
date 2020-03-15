@@ -6,7 +6,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -220,10 +219,17 @@ public class Controller {
         removeWorkerButton.setDisable(true);
     }
 
+    @FXML
+    private void switchToSecondary() throws Exception {
+        GallekApp.setRoot("sample2");
+    }
+    
+    
     public void addWorker() {
         Pracownik name = new Pracownik(polePracownik.getText());
         lista.add(name);
         listaPracownikowView.getItems().add(name);
+        listaPracownikowView.getSelectionModel().clearSelection();
         listaPracownikowView.getSelectionModel().selectLast();
         polePracownik.clear();
 
@@ -281,7 +287,8 @@ public class Controller {
 
     public void exit() {
         saveList();
-        Platform.exit();
+        //Platform.exit();
+        textArea.setText("Close option is disabled here - not to close the app.");
     }
 
     public void about(){
