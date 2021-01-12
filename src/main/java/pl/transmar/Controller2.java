@@ -1,8 +1,11 @@
 package pl.transmar;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -15,9 +18,31 @@ public class Controller2 {
     @FXML
     private TextArea textArea;
     private LocalDate date;
-    private HashMap<LocalDate, Day> days = new HashMap<>();
+    protected static HashMap<LocalDate, Day> days = new HashMap<>();
+
+
 
     public void initialize() {
+        datePicker.setDayCellFactory(new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(DatePicker param) {
+                final DateCell dc = new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (Controller2.days.containsKey(item) && Controller2.days.get(item).getDescription().trim().equals("")) {
+                            setTextFill(Color.BLACK);
+                        } else if (Controller2.days.containsKey(item)) {
+                            setTextFill(Color.BLUEVIOLET);
+                        } else {
+                            setTextFill(Color.BLACK);
+                        }
+                    }
+                };
+                return dc;
+            }
+        });
+
         String filename = "dailyreports.ser";
         try {
             // Reading the object from a file
@@ -56,10 +81,11 @@ public class Controller2 {
         if (days.containsKey(date)) {
             String description = days.get(date).getDescription();
             textArea.setText(description);
-            System.out.println("Already in HashMap");
+            System.out.println("Object exists - not creating.");
         } else {
             Day day = new Day(date);
             days.put(date, day);
+
             System.out.println("New object Day created");
         }
     }

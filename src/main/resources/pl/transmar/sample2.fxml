@@ -43,4 +43,11 @@
    </right>
    <left>
    </left>
+   <bottom>
+      <HBox alignment="CENTER" style="-fx-background-color: #666666;" BorderPane.alignment="CENTER">
+         <children>
+            <Label />
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

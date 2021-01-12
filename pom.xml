@@ -56,7 +56,6 @@
                 <artifactId>jpro-maven-plugin</artifactId>
                 <version>2019.2.2</version>
                 <configuration>
-                    <port>80</port>
                     <visible>false</visible>
                     <JVMArgs>
                         <!-- <JVMArg>your-args</JVMArg> -->
@@ -76,7 +75,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.3</version>
+                <version>0.0.4</version>
                 <configuration>
                     <mainClass>pl.transmar.Main</mainClass>
                     <launcher>TransMar</launcher>

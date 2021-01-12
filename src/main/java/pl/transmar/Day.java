@@ -9,7 +9,7 @@ public class Day implements Serializable {
 
     public Day(LocalDate date) {
         this.date = date;
-        this.description = null;
+        this.description = "";
     }
 
     public LocalDate getDate() {
@@ -21,7 +21,7 @@ public class Day implements Serializable {
     }
 
     public String getDescription() {
-        return description;
+            return description;
     }
 
     public void setDescription(String description) {

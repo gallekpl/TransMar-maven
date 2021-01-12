@@ -1,11 +1,10 @@
 package pl.transmar;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -89,130 +88,121 @@ public class Controller {
         listaPracownikowView.getItems().addAll(lista);
         textArea.setText("Wybierz pracownika");
 
-        listaPracownikowView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Pracownik>() {
-            @Override
-            public void changed(ObservableValue<? extends Pracownik> observableValue, Pracownik pracownik, Pracownik t1) {
-                if (t1 != null) {
-                    textArea.setText(t1.pokazGodziny());
-                    removeWorkerButton.setDisable(false);
-                } else removeWorkerButton.setDisable(true);
+        listaPracownikowView.getSelectionModel().selectedItemProperty().addListener((observableValue, pracownik, t1) -> {
+            if (t1 != null) {
+                textArea.setText(t1.pokazGodziny());
+                removeWorkerButton.setDisable(false);
+            } else removeWorkerButton.setDisable(true);
+        });
+        yearChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
+            String selected;
+            switch (t1) {
+                case "2020":
+                    year = years.get(0);
+                    selected = monthChoiceBox.getSelectionModel().getSelectedItem();
+                    monthChoiceBox.getSelectionModel().selectLast();
+                    monthChoiceBox.getSelectionModel().selectFirst();
+                    monthChoiceBox.getSelectionModel().select(selected);
+                    break;
+                case "2021":
+                    year = years.get(1);
+                    selected = monthChoiceBox.getSelectionModel().getSelectedItem();
+                    monthChoiceBox.getSelectionModel().selectLast();
+                    monthChoiceBox.getSelectionModel().selectFirst();
+                    monthChoiceBox.getSelectionModel().select(selected);
+                    break;
+                case "2022":
+                    year = years.get(2);
+                    selected = monthChoiceBox.getSelectionModel().getSelectedItem();
+                    monthChoiceBox.getSelectionModel().selectLast();
+                    monthChoiceBox.getSelectionModel().selectFirst();
+                    monthChoiceBox.getSelectionModel().select(selected);
+                    break;
+                case "2023":
+                    year = years.get(3);
+                    selected = monthChoiceBox.getSelectionModel().getSelectedItem();
+                    monthChoiceBox.getSelectionModel().selectLast();
+                    monthChoiceBox.getSelectionModel().selectFirst();
+                    monthChoiceBox.getSelectionModel().select(selected);
+                    break;
+                case "2024":
+                    year = years.get(4);
+                    selected = monthChoiceBox.getSelectionModel().getSelectedItem();
+                    monthChoiceBox.getSelectionModel().selectLast();
+                    monthChoiceBox.getSelectionModel().selectFirst();
+                    monthChoiceBox.getSelectionModel().select(selected);
+                    break;
+                case "2025":
+                    year = years.get(5);
+                    selected = monthChoiceBox.getSelectionModel().getSelectedItem();
+                    monthChoiceBox.getSelectionModel().selectLast();
+                    monthChoiceBox.getSelectionModel().selectFirst();
+                    monthChoiceBox.getSelectionModel().select(selected);
+                    break;
+                case "2026":
+                    year = years.get(6);
+                    selected = monthChoiceBox.getSelectionModel().getSelectedItem();
+                    monthChoiceBox.getSelectionModel().selectLast();
+                    monthChoiceBox.getSelectionModel().selectFirst();
+                    monthChoiceBox.getSelectionModel().select(selected);
+                    break;
             }
         });
-        yearChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                String selected;
-                switch (t1) {
-                    case "2020":
-                        year = years.get(0);
-                        selected = monthChoiceBox.getSelectionModel().getSelectedItem();
-                        monthChoiceBox.getSelectionModel().selectLast();
-                        monthChoiceBox.getSelectionModel().selectFirst();
-                        monthChoiceBox.getSelectionModel().select(selected);
-                        break;
-                    case "2021":
-                        year = years.get(1);
-                        selected = monthChoiceBox.getSelectionModel().getSelectedItem();
-                        monthChoiceBox.getSelectionModel().selectLast();
-                        monthChoiceBox.getSelectionModel().selectFirst();
-                        monthChoiceBox.getSelectionModel().select(selected);
-                        break;
-                    case "2022":
-                        year = years.get(2);
-                        selected = monthChoiceBox.getSelectionModel().getSelectedItem();
-                        monthChoiceBox.getSelectionModel().selectLast();
-                        monthChoiceBox.getSelectionModel().selectFirst();
-                        monthChoiceBox.getSelectionModel().select(selected);
-                        break;
-                    case "2023":
-                        year = years.get(3);
-                        selected = monthChoiceBox.getSelectionModel().getSelectedItem();
-                        monthChoiceBox.getSelectionModel().selectLast();
-                        monthChoiceBox.getSelectionModel().selectFirst();
-                        monthChoiceBox.getSelectionModel().select(selected);
-                        break;
-                    case "2024":
-                        year = years.get(4);
-                        selected = monthChoiceBox.getSelectionModel().getSelectedItem();
-                        monthChoiceBox.getSelectionModel().selectLast();
-                        monthChoiceBox.getSelectionModel().selectFirst();
-                        monthChoiceBox.getSelectionModel().select(selected);
-                        break;
-                    case "2025":
-                        year = years.get(5);
-                        selected = monthChoiceBox.getSelectionModel().getSelectedItem();
-                        monthChoiceBox.getSelectionModel().selectLast();
-                        monthChoiceBox.getSelectionModel().selectFirst();
-                        monthChoiceBox.getSelectionModel().select(selected);
-                        break;
-                    case "2026":
-                        year = years.get(6);
-                        selected = monthChoiceBox.getSelectionModel().getSelectedItem();
-                        monthChoiceBox.getSelectionModel().selectLast();
-                        monthChoiceBox.getSelectionModel().selectFirst();
-                        monthChoiceBox.getSelectionModel().select(selected);
-                        break;
-                }
+        monthChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
+            switch (t1) {
+                case "January":
+                    textArea.setText("Jan");
+                    lista = year.getStyczen();
+                    break;
+                case "February":
+                    textArea.setText("Feb");
+                    lista = year.getLuty();
+                    break;
+                case "March":
+                    textArea.setText("Mar");
+                    lista = year.getMarzec();
+                    break;
+                case "April":
+                    textArea.setText("Apr");
+                    lista = year.getKwiecien();
+                    break;
+                case "May":
+                    textArea.setText("May");
+                    lista = year.getMaj();
+                    break;
+                case "June":
+                    textArea.setText("Jun");
+                    lista = year.getCzerwiec();
+                    break;
+                case "July":
+                    textArea.setText("Jul");
+                    lista = year.getLipiec();
+                    break;
+                case "August":
+                    textArea.setText("Aug");
+                    lista = year.getSierpien();
+                    break;
+                case "September":
+                    textArea.setText("Sep");
+                    lista = year.getWrzesien();
+                    break;
+                case "October":
+                    textArea.setText("Oct");
+                    lista = year.getPazdziernik();
+                    break;
+                case "November":
+                    textArea.setText("Nov");
+                    lista = year.getListopad();
+                    break;
+                case "December":
+                    textArea.setText("Dec");
+                    lista = year.getGrudzien();
+                    break;
+                default:
+                    break;
             }
-        });
-        monthChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                switch (t1) {
-                    case "January":
-                        textArea.setText("Jan");
-                        lista = year.getStyczen();
-                        break;
-                    case "February":
-                        textArea.setText("Feb");
-                        lista = year.getLuty();
-                        break;
-                    case "March":
-                        textArea.setText("Mar");
-                        lista = year.getMarzec();
-                        break;
-                    case "April":
-                        textArea.setText("Apr");
-                        lista = year.getKwiecien();
-                        break;
-                    case "May":
-                        textArea.setText("May");
-                        lista = year.getMaj();
-                        break;
-                    case "June":
-                        textArea.setText("Jun");
-                        lista = year.getCzerwiec();
-                        break;
-                    case "July":
-                        textArea.setText("Jul");
-                        lista = year.getLipiec();
-                        break;
-                    case "August":
-                        textArea.setText("Aug");
-                        lista = year.getSierpien();
-                        break;
-                    case "September":
-                        textArea.setText("Sep");
-                        lista = year.getWrzesien();
-                        break;
-                    case "October":
-                        textArea.setText("Oct");
-                        lista = year.getPazdziernik();
-                        break;
-                    case "November":
-                        textArea.setText("Nov");
-                        lista = year.getListopad();
-                        break;
-                    case "December":
-                        textArea.setText("Dec");
-                        lista = year.getGrudzien();
-                        break;
-                    default:
-                        break;
-                }
-                listaPracownikowView.getItems().clear();
-                listaPracownikowView.getItems().addAll(lista);
-            }
+            listaPracownikowView.getItems().clear();
+            listaPracownikowView.getItems().addAll(lista);
         });
         addHoursButton.setDisable(true);
         addWorkerButton.setDisable(true);
@@ -223,8 +213,7 @@ public class Controller {
     private void switchToSecondary() throws Exception {
         GallekApp.setRoot("sample2");
     }
-    
-    
+
     public void addWorker() {
         Pracownik name = new Pracownik(polePracownik.getText());
         lista.add(name);
